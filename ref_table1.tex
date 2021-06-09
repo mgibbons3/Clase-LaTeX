@@ -1,0 +1,32 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfplots}
+\pgfplotsset{width=7cm,compat=1.8}
+\usepackage{pgfplotstable}
+
+\begin{filecontents*}{scientists.csv}
+name,surname,age
+Albert,Einstein,133
+Marie,Curie,145
+Thomas,Edison,165
+\end{filecontents*}
+
+\pgfplotstableread[col sep=comma]{scientists.csv}\mytable
+\def\getcell#1#2#3{
+\pgfplotstablegetelem{#1}{#2}\of{#3}\pgfplotsretval%
+}
+\begin{document}
+\pgfplotstabletypeset[
+    string type,
+    columns/name/.style={column name=Name, column type={|l}},
+    columns/surname/.style={column name=Surname, column type={|l}},
+    columns/age/.style={column name=Age, column type={|c|}},
+    every head row/.style={before row=\hline,after row=\hline},
+    every last row/.style={after row=\hline},
+    ]\mytable
+\bigskip \\
+\getcell{0}{name}{\mytable} \getcell{0}{surname}{\mytable} is \getcell{0}{age}{\mytable} 
+years old. \getcell{1}{name}{\mytable} \getcell{1}{surname}{\mytable} is 
+\getcell{1}{age}{\mytable} years old. But \getcell{2}{name}{\mytable} 
+\getcell{2}{surname}{\mytable} is still older, he is \getcell{2}{age}{\mytable} years old.
+\end{document}

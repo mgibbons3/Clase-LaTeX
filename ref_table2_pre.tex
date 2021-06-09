@@ -1,0 +1,18 @@
+\makeatletter
+\def\printandsetlabel#1#2#3{#2\setcounter{#1}{#2}%
+ \protected@edef\@currentlabel
+ {\csname p@#1\endcsname\csname the#1\endcsname}%
+ \label{#3}}
+\makeatother
+
+\newcounter{age}
+\newcommand*{\age}[2]{\printandsetlabel{age}{#1}{#2}}
+\usepackage{pgfplotstable}
+\pgfplotsset{compat=1.7}
+
+\begin{filecontents*}{scientists.csv}
+name,surname,age
+Albert,Einstein,\age{133}{albert}
+Marie,Curie,    \age{145}{marie}
+Thomas,Edison,  \age{165}{thomas}
+\end{filecontents*}

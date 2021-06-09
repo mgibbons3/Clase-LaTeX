@@ -1,0 +1,10 @@
+\begin{tikzpicture}
+\draw[thick,<->] (0,7) node[above]{$p$}--(0,0)--(8,0) node[right]{$q$};
+\draw (0,6)--(6,0) node[above right]{D};
+\draw (0,3) --(5,3) node[right]{$c_0$};
+\draw(0,2) --(5,2) node[right]{$c_1$};
+\draw[dashed] (0,4) node[left]{$p_1$}--(2,4)--(2,0) node[below]{$q_1$};
+\draw[dashed] (0,3) node[left]{$p_0$}--(3,3)--(3,0) node[below]{$q_0$};
+\path[pattern=horizontal lines,pattern color=red] (2,4)--(2,3)--(3,3);
+\path[pattern=vertical lines,pattern color=blue] (0,3)--(2,3)--(2,2)--(0,2);
+\end{tikzpicture}

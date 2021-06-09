@@ -1,0 +1,15 @@
+\usepackage{pgfplots}
+\pgfplotsset{width=7cm,compat=1.8}
+\usepackage{pgfplotstable}
+
+\begin{filecontents*}{scientists.csv}
+name,surname,age
+Albert,Einstein,133
+Marie,Curie.,145
+Thomas,Edison,165
+\end{filecontents*}
+
+\pgfplotstableread[col sep=comma]{scientists.csv}\mytable
+\def\getcell#1#2#3{
+\pgfplotstablegetelem{#1}{#2}\of{#3}\pgfplotsretval%
+}

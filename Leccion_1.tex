@@ -1,0 +1,587 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template Beamer Sugestivo para Projetos no Senac
+% by ezefranca.com
+% Based on MIT Beamer Template
+% As cores laranja e azul seguem o padrao proposto no manual de uso da identidade visual senac
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+%\documentclass{beamer} %voce pode usar este modelo tambem
+\documentclass[handout,t]{beamer}
+\usepackage{graphicx,url}
+\usepackage{subcaption,rotating,natbib}
+%\usepackage[english]{babel}   
+\usepackage[utf8]{inputenc}
+%\batchmode
+% \usepackage{pgfpages}
+% \pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=5mm]
+\usepackage{amsmath,amssymb,enumerate,epsfig,bbm,calc,color,ifthen,capt-of}
+\usetheme[compress]{Berlin}
+%\usetheme[compress]{Singapore}
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{appendixnumberbeamer}
+\DeclareUnicodeCharacter{394}{$\Delta$}
+
+\newcommand{\specialcell}[2][c]{%
+	\begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+
+\newcommand\partt[2][]{\ensuremath{\frac{\partial#1}{\partial#2}}} %the [2] indicates there will be 2 elements. This command defines a partial derivative where 2 arguments are numerator and denominator.
+\usepackage[none]{hyphenat}
+\include{graph_packages}
+\hypersetup{
+     colorlinks=true,
+     linkcolor=white,
+     filecolor=blue,      
+     urlcolor=blue,
+     citecolor=black,
+ }
+%\usepackage[backend=biber]{biblatex}
+%\usepackage{biblatex}
+%\usepackage[style=authoryear]{biblatex}
+%\usepackage{natbib}
+
+%\usepackage[natbib=true,style=authoryear,backend=bibtex,useprefix=true]{biblatex}
+%\addbibresource{Bib.bib}
+
+\setbeamertemplate{headline}
+{%
+	\begin{beamercolorbox}[colsep=1.5pt]{upper separation line head}
+	\end{beamercolorbox}
+	\begin{beamercolorbox}{section in head/foot}
+		\vskip2pt\insertnavigation{\paperwidth}\vskip2pt
+	\end{beamercolorbox}%
+	\begin{beamercolorbox}[colsep=1.5pt]{lower separation line head}
+	\end{beamercolorbox}
+}
+
+\setbeamertemplate{blocks}[rounded][shadow=true]
+\setbeamertemplate{footline}[frame number]{}
+
+%-------------------------Este código faz o menuzinho bacana na parte superior do slide------------
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+\beamerdefaultoverlayspecification{<+->}
+% -----------------------------------------------------------------------------
+% \begin{document}
+% % -----------------------------------------------------------------------------
+
+% %---Gerador de Sumário---------------------------------------------------------
+% \frame{\titlepage}
+% \section[]{}
+% \begin{frame}{Outline}
+%   \tableofcontents
+% \end{frame}
+% %---Fim do Sumário------------------------------------------------------------
+
+
+% % Para cambiar los colores de los diferentes elementos en la presentación, descomente y edite las siguitenes líneas
+
+% % Cambiar el color de las barras:
+% \setbeamercolor{Feather}{fg=structColor!50,bg=barColor}
+
+% % Cambiar el color de los elementos estructurales
+% \setbeamercolor{structure}{fg=structColor}
+
+% % Cambiar el color del título de las diapositivas
+% \setbeamercolor{frametitle}{fg=titlesColor}
+
+% % Cambiar el color del fondo de la diapositiva
+% \setbeamercolor{normal text}{fg=black, bg=backColor!35}
+
+%-------------------------------------------------------
+% PAQUETES INCLUIDOS
+%-------------------------------------------------------
+
+\usepackage[utf8]{inputenc}
+\usepackage{soulutf8}
+\usepackage[spanish, es-tabla]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{helvet}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{
+	calc, angles, quotes, positioning,
+    babel, shapes, arrows, shadows
+    }
+\usepackage{tkz-fct}
+\usepackage{circuitikz}
+\usetikzlibrary{babel}
+\usepackage{subcaption}
+\usepackage{calc}
+\usepackage{multirow, multicol}
+\usepackage{xcolor}
+\usepackage{xkeyval}
+\usepackage{minted}
+\RequirePackage{etex}
+
+%-------------------------------------------------------
+% DEFINICIÓN Y REDEFINICIÓN DE COLORES
+%-------------------------------------------------------
+\definecolor{structColor}{HTML}{201090} % 015793
+\definecolor{barColor}{HTML}{202122} % 202122
+\definecolor{backColor}{HTML}{8998B5} % 8998B5
+\definecolor{titlesColor}{HTML}{008100} % FF6614
+\definecolor{myBlue}{HTML}{027FDF}
+\definecolor{myGray}{HTML}{181818}
+\definecolor{myRed}{HTML}{AA3939}
+\definecolor{myGreen}{HTML}{32AB77}
+\definecolor{myOrange}{HTML}{FF6302}
+
+%-------------------------------------------------------
+% DEFINICIÓN Y REDEFINICIÓN DE COMANDOS
+%-------------------------------------------------------
+
+% color de los hyperenlaces
+\newcommand{\chref}[2]{
+  \href{#1}{{\usebeamercolor[bg]{Feather}#2}}
+}
+\newcommand{\bftt}[1]{\textbf{\texttt{#1}}}
+\newcommand*\keystroke[1]{%
+  \tikz[baseline=(key.base)]
+    \node[%
+      draw,
+      fill=white,
+      drop shadow={shadow xshift=0.25ex,shadow yshift=-0.25ex,fill=black,opacity=0.75},
+      rectangle,
+      rounded corners=2pt,
+      inner sep=1pt,
+      line width=0.5pt,
+      font=\scriptsize\sffamily
+    ](key) {#1\strut}
+  ;
+}
+\newcommand{\keystrokebftt}[1]{\keystroke{\bftt{#1}}}
+\newcommand{\comment}[1]{{\color[HTML]{008080}\textit{\textbf{\texttt{#1}}}}}
+\newcommand{\cmd}[1]{{\color[HTML]{008000}\bftt{#1}}} % comandos
+\newcommand{\bs}{\char`\\}
+\newcommand{\cmdbs}[1]{\cmd{\bs#1}}
+\newcommand{\lcb}{\char '173}
+\newcommand{\rcb}{\char '175}
+\newcommand{\cmdbegin}[1]{\cmdbs{begin\lcb}\bftt{#1}\cmd{\rcb}}
+\newcommand{\cmdend}[1]{\cmdbs{end\lcb}\bftt{#1}\cmd{\rcb}}
+\newcommand{\wllogo}{\textbf{Overleaf}}
+\newenvironment{exampletwouptiny}
+  {\VerbatimEnvironment
+   \begin{VerbatimOut}{example.out}}
+  {\end{VerbatimOut}
+   \setlength{\parindent}{0pt}
+   \fbox{\begin{tabular}{l|l}
+   \begin{minipage}{0.62\linewidth}
+     \inputminted[fontsize=\scriptsize,resetmargins]{latex}{example.out}
+   \end{minipage} &
+   \begin{minipage}{0.35\linewidth}
+     \setlength{\parskip}{6pt plus 1pt minus 1pt}%
+     \raggedright\scriptsize\input{example.out}
+   \end{minipage}
+   \end{tabular}}}
+%-------------------------------------------------------
+% INFORMACIÓN EN LA CABECERA DE PÁGINA
+%-------------------------------------------------------
+
+\title[\LaTeX - ] % [] opcional - se ubica en la barra inferior de cada diapositiva
+{
+      \textbf{\LaTeX} % título principal
+}
+
+\subtitle[v. 1.0.0] % subtítulo - se ubica en la barra inferior de cada diapositiva
+{
+      \textbf{Introducción y primeros pasos}
+}
+
+\author[] % [] opcional - se ubica en la barra inferior de cada diapositiva
+{      %Autor 
+      {\ttfamily Parte del material obtenido de \url{https://github.com/piratax007/LaTeX_Course}}
+}
+
+% \institute[]
+% {
+%       \\
+%       \\
+      
+%   % Deje una línea vacía sobre ésta para evitar sobreposición de espacios 
+% }
+
+\date{\today} % Fecha actual
+
+%%% Tablas
+        \input{ref_table1_pre.tex}
+        \input{ref_table2_pre.tex}
+
+
+%-------------------------------------------------------
+% CUERPO DE LA PRESENTACIÓN
+%-------------------------------------------------------
+
+\begin{document}
+
+%-------------------------------------------------------
+% DIAPOSITIVA DE PRESENTACIÓN
+%-------------------------------------------------------
+
+\begin{frame}[plain,noframenumbering] % la opción "plain" remueve el encabezado de la dispositiva de presentación, "noframenumbering" remueve la numeración de esta diapositiva únicamente
+  \titlepage % Llama a la información puesta en el bloque INFORMACIÓN EN LA CABECERA DE PÁGINA
+\end{frame}
+
+% \begin{frame}{Contenido}{} % Tabla de contenido
+% \tableofcontents
+% \end{frame}
+
+%-------------------------------------------------------
+\section{Primeros pasos} % Súbtítulo que aparece en la tabla de contenido
+
+\begin{frame}[fragile]{¿Cómo funciona \LaTeX?}
+	\begin{itemize}
+		\item En texto plano se escriben \cmd{comandos} que describen la estructura y contenido del documento.
+        \item El compilador de \LaTeX \; interpreta los comandos y los convierte en un bonito documento.
+	\end{itemize}
+    \begin{center}
+   		\begin{minted}[frame = single]{latex}
+Tales elementos son llamados \emph{radioactivos}.
+		\end{minted}
+        \vskip 2ex
+		\tikz\node[single arrow,fill=gray,font=\ttfamily\bfseries,%
+  			rotate=270,xshift=-1em]{latex};
+		\vskip 2ex
+        \fbox{Tales elementos son llamados \emph{radioactivos.}}
+    \end{center}
+\end{frame}
+
+\begin{frame}[c,fragile]{Primeros pasos}
+	\begin{itemize}
+	\small{
+		\item Un documento \emph{básico} en \LaTeX
+        	\inputminted[frame = single, fontsize=\footnotesize]{latex}{basics.tex}
+        \item Los comandos inician con \emph{backslash} \keystrokebftt{\bs}.
+        \item Cada documento inicia con el comando \cmdbs{documentclass}, el \emph{argumento} entre corchetes \keystrokebftt{\{} \keystrokebftt{\}} indica la clase de documento.
+        \item Los comentarios inician con el carácter porcentaje \keystrokebftt{\%}.
+        \item Tener un template con paquetes que usas seguido:
+        \begin{itemize}
+            \item Por ejemplo, no me gusta separar con guión las palabras \cmdbs{usepackage}[none]\{\cmd{hyphernat}\}
+            \item PDF copiable \cmdbs{input} glyphtounicode
+\cmdbs{pdfgentounicode}=1
+        \end{itemize}
+        }
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Texmaker}
+	\begin{figure}
+		\centering
+        \includegraphics[scale = .25]{texmaker.jpg}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Overleaf}
+	\begin{figure}
+		\centering
+        \includegraphics[scale = .25]{overleaf.jpg}
+	\end{figure}
+\end{frame}
+
+\begin{frame}[c]{Símbolos y caracteres especiales}
+	\begin{itemize}
+		\item Uso de comillas: \\
+        	Comillas simples \mintinline{latex}{`texto'} produce `texto' \\
+            Comillas dobles \mintinline{latex}{``texto''} produce ``texto''.
+        \item Algunos caracteres especiales \\
+        	\begin{tabular}{cl}
+        		\keystrokebftt{\%} & comentarios \\
+                \keystrokebftt{\#} & argumentos de entrada \\
+                \keystrokebftt{\&} & separador de tabulaciones \\
+                \keystrokebftt{\$} & matemáticas en línea
+        	\end{tabular}
+        \item Para escribir alguno de estos caracteres especiales debe anteceder un \keystrokebftt{\bs}, e.g \mintinline{latex}{\$} produce \$.
+	\end{itemize}
+\end{frame}
+
+\section{Escribiendo matemáticas}
+
+\begin{frame}[fragile]{El signo \$}
+	\begin{itemize}
+		\item ¿Por qué es especial el signo \keystrokebftt{\$}? Porque se utiliza para escribir matemáticas dentro de una línea de texto.
+\begin{exampletwouptiny}
+% NO luce bien:
+Sean a y b dos enteros positivos
+diferentes, entonces c = a - b + 1.
+
+% Luce bien:
+Sean $a$ y $b$ dos enteros positivos
+diferentes, entonces $c = a - b + 1$.
+\end{exampletwouptiny}
+\item Utilice siempre el signo \keystrokebftt{\$}, uno al inicio y otro al final de la expresión matemática.
+\item \LaTeX{} ignora automáticamente los espacios.
+\begin{exampletwouptiny}
+Sea $y=mx+b$ entonces \ldots
+
+Sea $y = m x + b$ entonces \ldots
+\end{exampletwouptiny}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Superíndices, subíndices y corchetes}
+\small{
+ \begin{table}[ht]
+	 \begin{center}
+	 \begin{tabular}{ l l }
+	 	\hline
+	 	\verb=|\,|= gives &  $|\,|$ \\
+	 	\verb=|\;|= gives &  $|\;|$ \\
+	 	\verb=|\quad|= gives &  $|\quad |$ \\
+	 	\verb=|\qquad|= gives & $|\qquad|$ \\
+	 	\verb=|\hspace{.5in}|= gives & $|\hspace{.5in}|$ \\
+	 	\verb=|\hspace{6em}|= gives & $|\hspace{6em}|$ \\
+   \hline
+	 \end{tabular}
+	 \end{center}
+	 \end{table} 
+	 }
+	\begin{itemize}
+		\item Utilice \keystrokebftt{\^} para superíndices y \keystrokebftt{\_} para subíndices.
+        \item Utilice corchetes \keystrokebftt{\{} \keystrokebftt{\}} para escribir superíndices o subíndices grandes.
+        \begin{exampletwouptiny}
+$a_n = a_n-1 $ % error
+$a_n = a_{n - 1}$ % correcto
+$f(x) = e^ax + b - c$ % error
+$f(x) = e^{ax + b} - c$ % correcto
+        \end{exampletwouptiny}
+        \item Existen comandos para las letras griegas y la notación común.
+        \begin{exampletwouptiny}
+$P(z)=\alpha+\lambda(z - \alpha)^n$
+$\iint_Sdxdy = \iint_{H(S)}dxdy$
+        \end{exampletwouptiny}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Documento clave}
+\hspace{-.5cm}\footnotesize{\url{es.overleaf.com/latex/templates/a-quick-guide-to-latex/fghqpfgnxggz}}
+\begin{figure}
+    \centering
+    \includegraphics[scale = .35]{guide.png}
+\end{figure}
+\end{frame}
+    
+
+\section{Ambientes}
+
+\begin{frame}[fragile]{Listas}
+	\begin{itemize}
+		\item Los comandos \cmdbs{begin} y \cmdbs{end} habilitan el uso de ambientes que son espacios ``especiales'' de un documento.
+        \begin{exampletwouptiny}
+\begin{itemize}
+	\item Le\'on
+	\item Tigre
+	\item ...
+\end{itemize}
+
+\begin{enumerate}
+	\item Criollo
+    \item Angora
+    \item ...
+\end{enumerate}
+        \end{exampletwouptiny}
+        \item Fundamental los comandos \cmdbs{itemsep} (separación entre items) y \cmdbs{setlength}\{\cmdbs{itemindent}\}\{-2em\} (espacio horizontal items)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{\texttt{equation}}
+	\begin{itemize}
+		\item El ambiente \texttt{equation} presente de una forma elegante ecuaciones grandes.
+    \begin{exampletwouptiny}
+Las ra\'ices de la ecuaci\'on
+cuadr\'atica est\'an dadas por
+\begin{equation}
+x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+\end{equation}
+donde $a$, $b$ y $c$ son \ldots
+    \end{exampletwouptiny}
+    \item La presentación de ecuaciones varía entre el modo \texttt{inline} y el modo \texttt{display} (ambiente \texttt{equation})
+    \begin{exampletwouptiny}
+Escribir $\Omega = \sum_{k=1}^n \omega _k$
+es diferente a escribir
+\begin{equation}
+\Omega = \sum_{k=1}^n \omega _k
+\end{equation}
+    \end{exampletwouptiny}
+    
+    \tiny{fíjese en la posición de los subíndices y superíndices de la suma.}
+    \end{itemize}
+\end{frame}
+
+\section{Paquetes}
+
+\begin{frame}[fragile]{paquete \texttt{amsmath}}
+	\begin{itemize}
+		\item Utilice \texttt{equation*} para ecuaciones no numeradas 
+        \begin{exampletwouptiny}
+\begin{equation*}
+	\Omega = \sum_{k=1}^n \omega_k
+\end{equation*}
+	    \end{exampletwouptiny}
+        \item \texttt{amsmath} define comandos para muchos operadores matemáticos
+        \begin{exampletwouptiny}
+\begin{equation*}
+	\min_{x,y}{(1-x)^2 + 100(y-x^2)^2}
+\end{equation*}
+	    \end{exampletwouptiny}
+        \item Puede definir operadores no incluidos en el paquete \linebreak con el comando \cmdbs{operatorname}.
+        \begin{exampletwouptiny}
+\begin{equation*}
+	\beta_i =
+    \frac{\operatorname{Cov}(R_i, R_m)}
+    	{\operatorname{Var}(R_m)}
+\end{equation*}
+	    \end{exampletwouptiny}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Alinear ecuaciones}
+	\begin{itemize}
+		\item Alinear una secuencia de ecuaciones con el ambiente \texttt{align*}
+        \inputminted[frame = single]{latex}{align_environment.tex}
+        \begin{align*}
+       		\frac{r^2R'' + rR'}{R} + r^2\lambda^2 &= v^2 \\
+        	r^2R'' + rR' + r^2\lambda^2R &= v^2R \\
+        	r^2R'' + rR' + (\lambda^2r^2 - v^2)R &= 0.
+        \end{align*}
+
+        \item Utiliza \keystrokebftt{\&} para establecer el caracter de alineación y \keystrokebftt{\bs} \keystrokebftt{\bs} para iniciar una nueva línea.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[c]{Crea tu comando}
+\begin{figure}
+    \centering
+    \includegraphics[scale=.65]{newcommand}
+\end{figure}
+	\begin{itemize}
+	\item \partt[y]{x}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Mendeley}
+	Download: \url{https://chrome.google.com/webstore/detail/mendeley-web-importer/dagcmkpagjlhakfdhnbomgmjdpkdklff/related?hl=en-US} \\
+	
+	Reference sheet for natbib usage: \url{https://gking.harvard.edu/files/natnotes2.pdf}
+	\newline
+	\\
+	\citet{Rossi2016a}
+	\bibliographystyle{apalike}
+	\bibliography{mendeley.bib}
+\end{frame}
+
+\begin{frame}[fragile]{Referencias Bibliográficas}
+	\begin{itemize}
+		\item El programa \bftt{Bibtex} produce la bibliografía en un documento \LaTeX{} a partir de una base de datos de referencias bibliográficas almacenada en un archivo \bftt{.bib}
+        \item Puede cargarse cuantos archivos \bftt{.bib} sean necesarios mediante el comando \cmdbs{bibliography}
+        \item Los nombres de los archivos \bftt{.bib} en el comando \cmdbs{bibliography} se separan con coma (,) y no necesitan llevar la extensión \bftt{.bib}
+        \item El comando \cmdbs{bibliographystyle} define el estilo de presentación de las referencias bibliográficas.
+        \item El comando \cmdbs{cite} cita una referencia bibliográfica en el documento
+	\end{itemize}
+\end{frame}
+
+\section{Tablas}
+
+\begin{frame}[fragile]{Tablas}
+	\begin{itemize}\small{
+		\item El paquete \cmdbs{tabular} permite crear arreglos de datos con o sin bordes (tablas)}
+		\begin{exampletwouptiny}
+\begin{tabular}{|c|c|}
+    \hline
+    celda 11 & celda 12 \\
+    \hline
+    celda 21 & celda 22 \\
+    \hline
+\end{tabular}
+        \end{exampletwouptiny}
+        \small{
+		\item \LaTeX{} resuelve el problema de que cambien de lugar a medida uno agrega texto manipulando figuras y tablas como objetos flotantes.}
+        \begin{minted}[frame = single, fontsize=\footnotesize]{latex}
+            \begin{figure}[ubicación]
+            ...
+            \end{figure}
+            \begin{table}[ubicación]
+            ...
+            \end{table}
+        \end{minted}
+        \item \small{La \emph{ubicación} puede ser \cmd{t} (top), \cmd{b} (botton) o \cmd{h} (here).}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Tablas}
+        \small{
+        \input{ref_table1_tab.tex}
+        }
+        \inputminted[fontsize=\scriptsize]{latex}{ref_table2_tab.tex}
+\end{frame}
+
+\begin{frame}[fragile]{Tablas}
+        \inputminted[fontsize=\footnotesize]{latex}{ref_table2_pre.tex}
+\end{frame}
+
+\begin{frame}[fragile]{Tablas}
+        \inputminted[fontsize=\scriptsize]{latex}{ref_table1_pre.tex}
+        \\
+        \begin{itemize}
+        \setlength{\itemindent}{-1em}
+        \small{
+            \item Manual \cmdbs{pgfplotstable}: \url{http://pgfplots.sourceforge.net/pgfplotstable.pdf}
+            \item Discusión en tex.stackexchange.com \url{tex.stackexchange.com/questions/86074/reference-table-value-in-text}
+            }
+        \end{itemize}
+        \end{frame}
+
+\section{Gráficos}
+\begin{frame}[fragile]{Gráficos}
+Links recomendados: \url{sites.google.com/site/kochiuyu/Tikz}
+\url{texample.net/tikz/examples/area/economics/}
+        \inputminted[fontsize=\scriptsize]{latex}{S-D.tex}
+        \resizebox{.6\textwidth}{!}{
+        \hspace{10cm}\input{S-D}
+        }
+\end{frame}
+
+\begin{frame}[fragile]{Gráficos}
+        \inputminted[fontsize=\scriptsize]{latex}{area.tex}
+        \resizebox{.8\textwidth}{!}{
+        \hspace{10cm}\input{area}
+        }
+\end{frame}
+
+ \begin{frame}{}
+  \vspace{-.2cm}
+        \inputminted[fontsize=\tiny]{latex}{intersection.tex}
+        \vspace{-1.1cm}
+        \begin{flushright}
+      \resizebox{.3\textwidth}{!}{
+        \input{intersection}
+        }
+        \end{flushright}
+  \end{frame}
+  
+  \begin{frame}[fragile,c]{Gráficos}
+        \resizebox{.8\textwidth}{!}{
+        \hspace{10cm}\input{is-lm_short}
+        }
+        \resizebox{.8\textwidth}{!}{
+        \hspace{7cm}\input{credit}
+        }
+\end{frame}
+  
+
+\section{Templates} 
+     \begin{frame}[c]{Templates}
+     \begin{itemize}
+         \item Beamer: \url{www.overleaf.com/gallery/tagged/presentation}
+         \item La que yo uso Beamer: \url{www.overleaf.com/read/fqybkcdgrdnr}
+         \item Para papers que yo armé: \url{www.overleaf.com/read/hrvmddfhxjzz}
+     \end{itemize}
+
+  \end{frame}
+
+\end{document}
